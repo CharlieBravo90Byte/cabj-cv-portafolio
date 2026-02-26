@@ -321,6 +321,58 @@
                 <p class="section-subtitle">Portafolio de proyectos personales y profesionales</p>
             </div>
             <div class="projects-grid">
+                <!-- NotasApp - Proyecto Destacado -->
+                <div class="project-card project-card--featured">
+                    <span class="project-badge">⭐ Destacado</span>
+                    <div class="project-image project-image--notas">
+                        <div class="project-icon-preview">
+                            <i class="fas fa-chart-bar"></i>
+                            <span>NotasApp</span>
+                        </div>
+                        <div class="project-overlay">
+                            <div class="project-links">
+                                <button
+                                    class="project-link"
+                                    title="Ver Demo"
+                                    onclick="projectModal.open('https://charliebravo90byte.github.io/NotasApp/', 'NotasApp - Gestión de Notas')"
+                                    aria-label="Ver Demo de NotasApp"
+                                >
+                                    <i class="fas fa-eye"></i>
+                                </button>
+                                <a href="https://github.com/CharlieBravo90Byte/NotasApp" target="_blank" rel="noopener" class="project-link" title="Ver Código en GitHub">
+                                    <i class="fab fa-github"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="project-content">
+                        <div class="project-header-row">
+                            <h3 class="project-title">📊 NotasApp</h3>
+                        </div>
+                        <p class="project-description">
+                            App web para gestionar notas universitarias con plantillas dinámicas. Calcula promedios ponderados, 
+                            exención de examen y nota mínima necesaria — todo guardado localmente en el navegador, 100% offline.
+                        </p>
+                        <div class="project-tech">
+                            <span class="tech-tag">HTML5</span>
+                            <span class="tech-tag">CSS3</span>
+                            <span class="tech-tag">JavaScript ES6+</span>
+                            <span class="tech-tag">IndexedDB</span>
+                        </div>
+                        <div class="project-actions">
+                            <button
+                                class="btn btn-preview"
+                                onclick="projectModal.open('https://charliebravo90byte.github.io/NotasApp/', 'NotasApp - Gestión de Notas')"
+                            >
+                                <i class="fas fa-eye"></i> Ver Aplicación
+                            </button>
+                            <a href="https://github.com/CharlieBravo90Byte/NotasApp" target="_blank" rel="noopener" class="btn btn-github">
+                                <i class="fab fa-github"></i> GitHub
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
                 <!-- Proyecto 1 -->
                 <div class="project-card">
                     <div class="project-image">
@@ -765,6 +817,47 @@
             </div>
         </div>
     </footer>
+
+    <!-- Modal de Vista de Proyecto -->
+    <div id="project-modal" class="project-modal" role="dialog" aria-modal="true" aria-labelledby="modal-title" style="display:none;">
+        <div class="project-modal__backdrop" onclick="projectModal.close()"></div>
+        <div class="project-modal__container">
+            <div class="project-modal__header">
+                <h3 class="project-modal__title" id="modal-title">Vista de Proyecto</h3>
+                <div class="project-modal__header-actions">
+                    <a id="modal-external-link" href="#" target="_blank" rel="noopener" class="project-modal__btn project-modal__btn--external" title="Abrir en nueva pestaña">
+                        <i class="fas fa-external-link-alt"></i>
+                        <span>Abrir</span>
+                    </a>
+                    <button class="project-modal__btn project-modal__btn--close" onclick="projectModal.close()" title="Cerrar" aria-label="Cerrar vista">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+            </div>
+            <div class="project-modal__body">
+                <div class="project-modal__loader" id="modal-loader">
+                    <div class="project-modal__spinner"></div>
+                    <p>Cargando aplicación…</p>
+                </div>
+                <div class="project-modal__fallback" id="modal-fallback" style="display:none;">
+                    <i class="fas fa-exclamation-circle"></i>
+                    <h4>Vista previa no disponible</h4>
+                    <p>La aplicación aún no tiene GitHub Pages habilitado. Puedes verla directamente en GitHub.</p>
+                    <a id="modal-fallback-link" href="https://github.com/CharlieBravo90Byte/NotasApp" target="_blank" rel="noopener" class="btn btn-primary">
+                        <i class="fab fa-github"></i> Ver en GitHub
+                    </a>
+                </div>
+                <iframe
+                    id="project-modal-iframe"
+                    class="project-modal__iframe"
+                    src=""
+                    title="Vista previa del proyecto"
+                    sandbox="allow-scripts allow-same-origin allow-forms allow-popups"
+                    loading="lazy"
+                ></iframe>
+            </div>
+        </div>
+    </div>
 
     <script src="script.js"></script>
 </body>

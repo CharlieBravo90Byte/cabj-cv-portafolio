@@ -651,3 +651,93 @@ const app = new CVPortfolio();
 if (typeof module !== 'undefined' && module.exports) {
     module.exports = CVPortfolio;
 }
+
+// =============================================
+// Project Modal - Vista de Proyecto
+// =============================================
+const projectModal = (() => {
+    const GITHUB_PAGES_BASE = 'https://charliebravo90byte.github.io/NotasApp/';
+    let currentUrl = '';
+
+    const el = {
+        modal:        () => document.getElementById('project-modal'),
+        iframe:       () => document.getElementById('project-modal-iframe'),
+        title:        () => document.getElementById('modal-title'),
+        extLink:      () => document.getElementById('modal-external-link'),
+        loader:       () => document.getElementById('modal-loader'),
+        fallback:     () => document.getElementById('modal-fallback'),
+        fbLink:       () => document.getElementById('modal-fallback-link'),
+    };
+
+    function open(url, title) {
+        currentUrl = url;
+
+        // Reset UI state
+        el.modal().style.display = 'flex';
+        el.modal().classList.remove('project-modal--closing');
+        el.iframe().src = '';
+        el.title().textContent = title || 'Vista de Proyecto';
+        el.extLink().href = url;
+        el.fbLink().href = url.includes('github.io') 
+            ? 'https://github.com/CharlieBravo90Byte/NotasApp' 
+            : url;
+
+        // Show loader, hide fallback & iframe
+        el.loader().style.display = 'flex';
+        el.fallback().style.display = 'none';
+        el.iframe().style.display = 'none';
+
+        // Prevent body scroll
+        document.body.style.overflow = 'hidden';
+
+        // Load iframe
+        const iframe = el.iframe();
+        
+        // Timeout: if GitHub Pages returns error (no habilitado), muestra fallback
+        const fallbackTimer = setTimeout(() => {
+            showFallback();
+        }, 8000);
+
+        iframe.onload = () => {
+            clearTimeout(fallbackTimer);
+            // If the page loaded (even a 404 from GH Pages), we show it
+            // A real error would have been caught earlier or shown in iframe
+            el.loader().style.display = 'none';
+            el.fallback().style.display = 'none';
+            iframe.style.display = 'block';
+        };
+
+        iframe.onerror = () => {
+            clearTimeout(fallbackTimer);
+            showFallback();
+        };
+
+        iframe.src = url;
+    }
+
+    function showFallback() {
+        el.loader().style.display = 'none';
+        el.iframe().style.display = 'none';
+        el.fallback().style.display = 'flex';
+    }
+
+    function close() {
+        const modal = el.modal();
+        modal.classList.add('project-modal--closing');
+        setTimeout(() => {
+            modal.style.display = 'none';
+            modal.classList.remove('project-modal--closing');
+            el.iframe().src = ''; // detener carga/recursos
+            document.body.style.overflow = '';
+        }, 200);
+    }
+
+    // Cerrar con tecla Escape
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && el.modal().style.display === 'flex') {
+            close();
+        }
+    });
+
+    return { open, close };
+})();
