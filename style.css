@@ -1398,6 +1398,13 @@ section {
     justify-content: center;
 }
 
+.project-image--tbk {
+    background: linear-gradient(135deg, #3b82f6 0%, #1e40af 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
 .project-icon-preview {
     display: flex;
     flex-direction: column;
