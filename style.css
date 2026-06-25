@@ -1405,6 +1405,13 @@ section {
     justify-content: center;
 }
 
+.project-image--mundial {
+    background: linear-gradient(135deg, #15803d 0%, #854d0e 60%, #ca8a04 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
 .project-icon-preview {
     display: flex;
     flex-direction: column;
@@ -1461,6 +1468,20 @@ section {
     transform: translateY(-2px);
     box-shadow: var(--shadow-lg);
     color: #fff;
+}
+
+.btn-disabled {
+    opacity: 0.55;
+    cursor: default;
+    background: var(--text-muted);
+    box-shadow: none;
+    pointer-events: none;
+    user-select: none;
+}
+
+.btn-disabled:hover {
+    transform: none;
+    box-shadow: none;
 }
 
 .btn-github {
